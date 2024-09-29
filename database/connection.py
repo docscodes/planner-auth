@@ -8,11 +8,11 @@ from pydantic import BaseModel
 from pydantic_settings import BaseSettings
 
 class Settings(BaseSettings):
-  DATABASE_URL: Optional[str] = None
+  MONGODB_URI: Optional[str] = None
   SECRET_KEY: Optional[str] = None
 
   async def initialize_database(self):
-    client = AsyncIOMotorClient(self.DATABASE_URL)
+    client = AsyncIOMotorClient(self.MONGODB_URI)
     await init_beanie(database=client.get_default_database(),
                       document_models=[Event, User])
 
